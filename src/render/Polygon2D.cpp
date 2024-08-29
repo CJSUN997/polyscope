@@ -2,12 +2,12 @@
 // Created by SunCJ on 2024/8/29.
 //
 
-#include "polyscope/render/Polygen2D.h"
+#include "polyscope/render/Polygon2D.h"
 #include <iostream>
 namespace polyscope {
 namespace render {
 
-void Polygen2D::draw() {
+void Polygon2D::draw() {
   if (!enable_ || vertices.empty()) return;
   // Draw the polygen 2D
   std::cout << "======= draw polygen 2D ======" << std::endl;

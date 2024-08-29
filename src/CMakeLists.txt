@@ -255,7 +255,7 @@ SET(SRCS
   render/bindata/bindata_ceramic.cpp
   render/bindata/bindata_jade.cpp
   render/bindata/bindata_normal.cpp
-        render/Polygen2D.cpp ../include/polyscope/render/Polygen2D.h)
+        render/Polygon2D.cpp ../include/polyscope/render/Polygon2D.h)
 
 
 # Setting headers is useful for some build systems. For instance, in Visual Studio this is necessary for the header files to be indexed as a part of the project.
@@ -352,7 +352,7 @@ SET(HEADERS
   ${INCLUDE_ROOT}/volume_grid_quantity.h
   ${INCLUDE_ROOT}/volume_grid_scalar_quantity.h
   ${INCLUDE_ROOT}/weak_handle.h
-        render/Polygen2D.cpp ../include/polyscope/render/Polygen2D.h)
+        render/Polygon2D.cpp ../include/polyscope/render/Polygon2D.h)
 
 # Create a single library for the project
 add_library(polyscope ${SRCS} ${BACKEND_SRCS} ${HEADERS} ${BACKEND_HEADERS})
