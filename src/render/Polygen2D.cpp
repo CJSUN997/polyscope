@@ -8,11 +8,13 @@ namespace polyscope {
 namespace render {
 
 void Polygen2D::draw() {
-  if (!enable_) return;
+  if (!enable_ || vertices.empty()) return;
   // Draw the polygen 2D
   std::cout << "======= draw polygen 2D ======" << std::endl;
-  for(auto& v: vertices){ std::cout << v.x << " " << v.y ;}
+  for(auto& v: vertices){ std::cout << "[ " <<v.x << " " << v.y << "], " ;}
   std::cout << std::endl;
+
+
 
 };
 
