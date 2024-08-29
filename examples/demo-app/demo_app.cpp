@@ -32,6 +32,7 @@
 #include "glm/gtx/string_cast.hpp"
 
 #include "stb_image.h"
+#include <iostream>
 
 
 bool endsWith(const std::string& str, const std::string& suffix) {
@@ -744,8 +745,40 @@ void callback() {
   static float param = 3.14;
   static int loadedMat = 1;
   static bool depthClick = false;
+  static glm::vec2 startPos = {0, 0};
 
   ImGui::PushItemWidth(100);
+  bool selectMode = polyscope::render::engine->selected_bounding_box.isEnable();
+  if (ImGui::Button(selectMode? "disable select mode":"enable select mode")) {
+    selectMode = !selectMode;
+    polyscope::render::engine->selected_bounding_box.setEnable(selectMode);
+    // if is selectMode , disable camera view rotate
+    if (selectMode) {
+      polyscope::state::doDefaultMouseInteraction = false;
+      std::cout << "In select Mode, disable default mouse interaction" << std::endl;
+
+    } else {
+      polyscope::state::doDefaultMouseInteraction = true;
+      std::cout << "Out select Mode, enable default mouse interaction" << std::endl;
+    }
+  }
+
+  if (selectMode) {
+    ImGuiIO& io = ImGui::GetIO();
+    if (io.MouseClicked[0]) {
+      if (startPos.x == -1) {
+        startPos = {io.MousePos.x, io.MousePos.y};
+      }
+      glm::vec2 endPos{io.MousePos.x, io.MousePos.y};
+      glm::vec2 Pos1 = {startPos.x, endPos.y};
+      glm::vec2 Pos2 = {endPos.x, startPos.y};
+      polyscope::render::engine->selected_bounding_box.setVertices({startPos, Pos1, endPos, Pos2});
+    }
+    if (io.MouseReleased[0]) {
+      polyscope::render::engine->selected_bounding_box.setVertices({});
+      startPos = {-1, -1};
+    }
+  }
 
   ImGui::InputInt("num points", &numPoints);
   ImGui::InputFloat("param value", &param);

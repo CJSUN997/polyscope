@@ -477,6 +477,7 @@ void renderScene() {
         render::engine->applyTransparencySettings();
         drawStructuresDelayed();
       }
+      render::engine->selected_bounding_box.draw();
 
       // Composite the result of this pass in to the result buffer
       render::engine->sceneBufferFinal->bind();
@@ -500,6 +501,7 @@ void renderScene() {
 
     render::engine->applyTransparencySettings();
     drawStructuresDelayed();
+    render::engine->selected_bounding_box.draw();
 
     render::engine->sceneBuffer->blitTo(render::engine->sceneBufferFinal.get());
   }

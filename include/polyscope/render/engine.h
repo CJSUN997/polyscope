@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 
+#include "polyscope/render/Polygen2D.h"
 #include "polyscope/render/color_maps.h"
 #include "polyscope/render/ground_plane.h"
 #include "polyscope/render/materials.h"
@@ -488,8 +489,9 @@ public:
 
   // === Scene data and niceties
   GroundPlane groundPlane;
+  Polygen2D selected_bounding_box;
 
-  // === Windowing and framework things
+      // === Windowing and framework things
   virtual void makeContextCurrent() = 0;
   virtual void focusWindow() = 0;
   virtual void showWindow() = 0;
