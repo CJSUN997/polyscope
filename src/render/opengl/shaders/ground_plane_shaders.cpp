@@ -321,8 +321,47 @@ R"(
 )"
 };
 
+
+const ShaderStageSpecification POLYGON2D_VERT_SHADER = {
+  ShaderStageType::Vertex,
+  { // uniforms
+  },
+  { // attributes
+    {"a_position", RenderDataType::Vector2Float},
+  },
+  {}, // textures
+
+  // source 
+  R"(
+    ${ GLSL_VERSION }$
+    in vec2 a_position;
+
+    void main() {
+        gl_Position = vec4(a_position, 0.0, 1.0);
+    }
+  )"  
+};
+
+const ShaderStageSpecification POLYGON2D_FRAG_SHADER = {
+  ShaderStageType::Fragment,
+
+  {}, 
+  {},
+  {},
+
+  R"(
+    ${ GLSL_VERSION }$
+    out vec4 FragColor;
+
+    void main() {
+        FragColor = vec4(1.0, 0.0, 0.0, 1.0); // 白色
+    }
+  )"
+};
+
 // clang-format on
 
 } // namespace backend_openGL3
 } // namespace render
 } // namespace polyscope
+

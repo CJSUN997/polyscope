@@ -2481,6 +2481,8 @@ void GLEngine::populateDefaultShadersAndRules() {
   registerShaderProgram("BLUR_RGB", {TEXTURE_DRAW_VERT_SHADER, BLUR_RGB}, DrawMode::Triangles);
   registerShaderProgram("TRANSFORMATION_GIZMO_ROT", {TRANSFORMATION_GIZMO_ROT_VERT, TRANSFORMATION_GIZMO_ROT_FRAG}, DrawMode::Triangles);
 
+  registerShaderProgram("POLYGON2D", {POLYGON2D_VERT_SHADER, POLYGON2D_FRAG_SHADER}, DrawMode::Lines);
+
   // === Load rules
 
   // Utility rules

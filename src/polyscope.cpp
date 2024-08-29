@@ -155,7 +155,7 @@ void init(std::string backend) {
   // Initialie ImGUI
   IMGUI_CHECKVERSION();
   render::engine->initializeImGui();
-
+  render::engine->selected_bounding_box.init();
   // Create an initial context based context. Note that calling show() never actually uses this context, because it
   // pushes a new one each time. But using frameTick() may use this context.
   contextStack.push_back(ContextEntry{ImGui::GetCurrentContext(), nullptr, true});
@@ -1169,6 +1169,7 @@ void refresh() {
 
   // reset the ground plane
   render::engine->groundPlane.prepare();
+  render::engine->selected_bounding_box.init();
 
   // reset all of the structures
   for (auto& cat : state::structures) {
@@ -1221,6 +1222,7 @@ void processLazyProperties() {
     lazy::ssaaFactor = options::ssaaFactor;
     render::engine->setSSAAFactor(options::ssaaFactor);
   }
+  // selected box
 
   // ground plane
   if (lazy::groundPlaneEnabled != options::groundPlaneEnabled || lazy::groundPlaneMode != options::groundPlaneMode) {

@@ -766,15 +766,15 @@ void callback() {
   if (selectMode) {
     ImGuiIO& io = ImGui::GetIO();
     if (io.MouseClicked[0]) {
-      startPos = {io.MousePos.x, io.MousePos.y};
+      startPos = {io.MousePos.x / polyscope::view::windowWidth * 2 - 1, 1 - io.MousePos.y / polyscope::view::windowHeight * 2 };
       std::cout << "startPos" << startPos.x << " " << startPos.y << std::endl;
     }
     else if (io.MouseDown[0]) { // refresh end point and set vertices for self select box
-      glm::vec2 endPos{io.MousePos.x, io.MousePos.y};
+      glm::vec2 endPos{io.MousePos.x / polyscope::view::windowWidth * 2 - 1, 1 - io.MousePos.y / polyscope::view::windowHeight * 2 };
       std::cout << "endPos" << endPos.x << " " << endPos.y << std::endl;
       glm::vec2 Pos1 = {startPos.x, endPos.y};
       glm::vec2 Pos2 = {endPos.x, startPos.y};
-      polyscope::render::engine->selected_bounding_box.setVertices({startPos, Pos1, endPos, Pos2});
+      polyscope::render::engine->selected_bounding_box.setVertices({startPos, Pos1, endPos, Pos2, startPos});
     }
     else if (io.MouseReleased[0]) {
       polyscope::render::engine->selected_bounding_box.setVertices({});
